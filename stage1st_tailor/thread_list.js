@@ -24,7 +24,7 @@ $("#threadlisttableid > tbody").each(function(p){
 
     $( this ).find("> tr > th")
       // .append('<span><input type="checkbox" id="hidden_' + tid + '">hide</span>');
-      .append('<a id="hidden_' + tid + '" class="showhide y" title="隐藏">Hide</a>').click(function() {
+      .append('<a id="hidden_' + tid + '" class="showhide y" title="隐藏">Hide</a>').find('#hidden_' + tid).click(function() {
         var a = [];
         a = JSON.parse(localStorage.getItem('hideThreadList'));
         a.push(tid);
