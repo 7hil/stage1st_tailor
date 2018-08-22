@@ -71,6 +71,7 @@ $("#threadlisttableid > tbody").each(function(p){
 $("[title='查看更新']").each(function() {
   $(this).parent().append('<span id="clearstickthread" style=""><span class="pipe">|</span><a href="javascript:;" class="xi2" title="toogle to display">显示隐藏</a></span>').find('[title="toogle to display"]').click(function() {
     localStorage.hideThreadList='[]';
+    location.reload();
   });
 });
 
@@ -107,12 +108,14 @@ chrome.storage.local.get(tid_list, function(items) {
 //   }
 // });
 
+if(!localStorage.getItem('hideThreadList')){
+  localStorage.hideThreadList='[]';
+}
 var hideThreadList = JSON.parse(localStorage.getItem('hideThreadList'));
 for(thread in hideThreadList) {
   var tid = hideThreadList[thread];
   tid_map[tid].css("display", "none");
 }
-
 
 
 chrome.storage.local.get(tid_dim_list, function(items) {
