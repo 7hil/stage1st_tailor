@@ -101,9 +101,18 @@ chrome.storage.local.get(tid_list, function(items) {
 });
 
 
-//watch
-// $(document).on('DOMNodeInserted', function(e) {
-//   if ( $(e.target=='tbody')) {
+//watch, test
+var loadingStatus = true;
+$(document).on('DOMNodeInserted', function(e) {
+  if ($(e.target).hasClass('bm_h')) {
+    loadingStatus = !loadingStatus;
+    if(loadingStatus) {
+      $("#threadlisttableid").each(function() {
+        // console.log($(this));
+        //此时下一页的帖子列表完成加载
+        //此时可以加载代码
+      })
+    }
+  }
+});
 
-//   }
-// });
