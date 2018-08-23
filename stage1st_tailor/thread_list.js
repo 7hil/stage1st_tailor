@@ -27,7 +27,7 @@ if(!localStorage.getItem('fadeThreadList')){
 
 
 
-$("#threadlisttableid > tbody").each(function(p){
+$("#threadlisttableid > tbody").each(function(){
   if (pattern.exec($( this ).attr("id")) != null) {
     var tid = pattern.exec($( this ).attr("id"))[1];
     tid_list.push(tid);
@@ -46,7 +46,7 @@ $("#threadlisttableid > tbody").each(function(p){
       });
 
     $( this ).find("> tr > th")
-      .append('<span><input type="checkbox" id="dim_' + tid + '">Fade</span>').find('#dim_' + tid).click(function() {
+      .append('<span id="dim_' + tid + '"><input type="checkbox" >Fade</span>').find('#dim_' + tid).click(function() {
         var b = [], index;
         b = JSON.parse(localStorage.getItem('fadeThreadList'));
         index = b.indexOf(tid);
@@ -69,11 +69,15 @@ fadeThreadList = JSON.parse(localStorage.getItem('fadeThreadList'));
 
 for(thread in hideThreadList) {
   var tid = hideThreadList[thread];
-  tid_map[tid].css("display", "none");
+  if(tid_map[tid]) {
+    tid_map[tid].css("display", "none");
+  }
 }
 for(thread in fadeThreadList) {
   var tid = fadeThreadList[thread];
-  tid_map[tid].find("> tr > th > a.s.xst").css("color", "#f6f7eb");
+  if(tid_map[tid]) {
+    tid_map[tid].find("> tr > th > a.s.xst").css("color", "#f6f7eb");
+  }
 }
 
 
@@ -95,3 +99,11 @@ chrome.storage.local.get(tid_list, function(items) {
     // tid_map[i].css("background", "#022c80b3");
   }
 });
+
+
+//watch
+// $(document).on('DOMNodeInserted', function(e) {
+//   if ( $(e.target=='tbody')) {
+
+//   }
+// });
